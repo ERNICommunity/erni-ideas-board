@@ -1,2 +1,2 @@
 # erni-ideas-board-backend
-ERNI Ideas Board backend.
+ERNI Community Ideas Board backend.
