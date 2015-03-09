@@ -1,2 +1,2 @@
-# erni-ideas-board-backend
-ERNI Community Ideas Board backend.
+# ERNI Ideas Board
+Repository containing both backend and frontend. More details to come!
