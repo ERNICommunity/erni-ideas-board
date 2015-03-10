@@ -22,7 +22,7 @@ Note: You should have MongoDB running already.
 
 `mvn clean package spring-boot:run`
 
-And the you can navigate to `http://localhost:8080` or `http://localhost:8080/hello` for HelloWorld message.
+And the you can navigate to `http://localhost:8080`. There already is one super-simple REST endpoint: `http://localhost:8080/ideas` which supports CRUD operations. Explore it ;).
  
 ## How to deploy it as a war file to standalone Tomcat
 First you need to enable the `package-war` mavne profile and run `mvn clean package`. 
