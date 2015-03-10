@@ -11,7 +11,7 @@
 - Standalone MongoDB installation
 
 ### For making changes in the code
-- IntelliJ IDEA or Eclipse (Spring source version should fit better)
+- IntelliJ IDEA or Eclipse ([Spring's version might be suitable](https://spring.io/tools/sts))
 - Standalone Apache Tomcat 8.x - this is useful if you want to make use of "Update classes and resources" feature for rapid development (see below)
 
 ## How to build it using Maven

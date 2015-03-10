@@ -5,6 +5,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
+ * This is a main class for the deployment to the standalone Tomcat (or other) servlet container.
+ * To enable this class choose `package-war` maven profile.
+ *
  * @author rap
  */
 @SpringBootApplication
