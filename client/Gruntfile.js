@@ -75,12 +75,12 @@ module.exports = function (grunt) {
       proxies:[
         {
             // FIXME: addapt the context depending on how BE serve the REST endpoints
-            context: '/services',
+            context: '/ideas',
             host: 'localhost',
             port: 8080, 
-            rewrite: {
+            /*rewrite: {
                 '^/services/(.*)$': '/api/services/$1'
-            },
+            },*/
             https: false,
             xforward: false,
             headers: {

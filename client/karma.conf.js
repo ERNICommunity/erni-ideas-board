@@ -29,6 +29,8 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/rfc6570/rfc6570.js',
+      'bower_components/angular-hal/angular-hal.js',
       // endbower
       'app/modules/**/*.module.js',
       'app/modules/*.js',

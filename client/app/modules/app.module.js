@@ -5,7 +5,8 @@
         .module('ideasBoardApp', [
             'ideasBoardApp.home',
             'ideasBoardApp.myIdeas',
-            'ideasBoardApp.discussVote'
+            'ideasBoardApp.discussVote',
+            'ideasBoardApp.idea'
         ]);
 
 })();
