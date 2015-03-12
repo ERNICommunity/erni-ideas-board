@@ -65,3 +65,11 @@ Any computer with Windows, Linux or Mac OS can be used for building and running 
             mongod --dbpath "C:\dev\db\mongodb-data"
             
 - Finally, you can run the `mvn spring-boot:run` (inside the application root) and the server should start up. When you navigate your browser to `http://localhost:8080` you should get some default JSON message as a response. 
+
+### Troubleshooting
+
+When you get trying to build the sources via Maven error message like this:
+
+`[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project backend: Fatal error compiling: invalid target release: 1.8 -> [Help 1]`
+
+It is most likely caused by incorrect JAVA_HOME variable. Ensure that it is set to jdk8 and that when you run `mvn --version` the used java version is 8.
