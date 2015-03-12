@@ -14,16 +14,16 @@
 	npm install
 	bower install
 
-### Usage (*)
+### Usage
 
-- Live development mode
+Live development mode
 
 	grunt serve
 
-- Run tests
+Run tests
 
 	grunt test
 
-- Distribution build
+Distribution build
 
 	grunt build

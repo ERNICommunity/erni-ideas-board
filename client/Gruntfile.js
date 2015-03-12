@@ -72,20 +72,35 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies:[
+        {
+            // FIXME: addapt the context depending on how BE serve the REST endpoints
+            context: '/services',
+            host: 'localhost',
+            port: 8080, 
+            rewrite: {
+                '^/services/(.*)$': '/api/services/$1'
+            },
+            https: false,
+            xforward: false,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
+
+            // Setup the proxy
+            var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
             return [
+              proxy,
               connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
+              connect().use('/bower_components', connect.static('./bower_components')),
+              connect().use('/app/styles', connect.static('./app/styles')),
               connect.static(appConfig.app)
             ];
           }
@@ -387,6 +402,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -398,6 +414,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
