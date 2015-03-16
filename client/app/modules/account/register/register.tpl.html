@@ -1,0 +1,24 @@
+<div class="container-login">
+
+    <p>Please enter you account details details in the form below.</p>
+    <br>
+
+    <form name="registerForm" ng-submit="register(details)">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username"
+               ng-model="details.username" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password"
+               ng-model="details.password" required><br>
+        <label for="confirmPassword">Confirm password:</label><br>
+        <input type="password" id="confirmPassword"
+               ng-model="details.confirmPassword" required><br>
+        <label for="phone">Phone:</label><br>
+        <input type="tel" id="phone"
+               ng-model="details.phone" required><br>
+        <label for="email">Email</label><br>
+        <input type="email" id="email"
+               ng-model="details.email"><br>	
+        <button type="submit">Create user account</button>
+    </form>
+</div>
