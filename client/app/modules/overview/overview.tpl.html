@@ -1,0 +1,26 @@
+<h3>Overview</h3>
+
+<form novalidate name="newIdeaForm" >
+	<input type="description" required ng-model="query" placeholder="Search..." /><br>
+</form>
+<br>
+<div class="table-wrapper">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Tags</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="idea in ideas | filter:query">
+				<td>{{idea.id}}</td>
+				<td>{{idea.name}}</td>
+				<td>{{idea.description}}</td>
+				<td>{{idea.tags}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
