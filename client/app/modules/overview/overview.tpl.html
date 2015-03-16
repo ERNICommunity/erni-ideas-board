@@ -1,21 +1,21 @@
 <h3>Overview</h3>
 
 <form novalidate name="newIdeaForm" >
-	<input type="description" required ng-model="query" placeholder="Search..." /><br>
+	<input type="description" ng-model="query" placeholder="Search..." /><br>
 </form>
 <br>
 <div class="table-wrapper">
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Tags</th>
+				<th><a href="" ng-click="predicate = 'id'; reverse=!reverse">ID</a></th>
+				<th><a href="" ng-click="predicate = 'name'; reverse=!reverse">Name</a></th>
+				<th><a href="" ng-click="predicate = 'description'; reverse=!reverse">Description</a></th>
+				<th><a href="" ng-click="predicate = 'tags'; reverse=!reverse">Tags</a></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="idea in ideas | filter:query">
+			<tr ng-repeat="idea in ideas | filter:query | orderBy:predicate:reverse">
 				<td>{{idea.id}}</td>
 				<td>{{idea.name}}</td>
 				<td>{{idea.description}}</td>

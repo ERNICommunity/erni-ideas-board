@@ -12,20 +12,22 @@
         $scope.ideas = [{
                 id: 0,
                 name: 'John',
-                description: 'fooooo!',
+                description: 'a fooooo!',
                 tags: '#bar, #great'
             },
             {
                 id: 1,
                 name: 'Bill',
-                description: 'fooooo!',
-                tags: '#bar, #great'
+                description: 'b fooooo!',
+                tags: '#great'
             },
             {
                 id: 2,
                 name: 'Klaus',
-                description: 'fooooo!',
-                tags: '#bar, #great'
+                description: 'c fooooo!',
+                tags: '#bar'
             }];
+        $scope.predicate = '-id';
+        $scope.reverse = true;
     }
 })();
