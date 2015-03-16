@@ -8,7 +8,7 @@
     config.$inject = ['$urlRouterProvider'];
 
     function config($urlRouterProvider) {
-       $urlRouterProvider.otherwise("/");
+       $urlRouterProvider.otherwise('/');
     }
 
 })();
