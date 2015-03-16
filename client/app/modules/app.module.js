@@ -8,7 +8,8 @@
             'ideasBoardApp.myIdeas',
             'ideasBoardApp.discussVote',
             'ideasBoardApp.idea',
-            'ideasBoardApp.overview'
+            'ideasBoardApp.overview',
+			'ideasBoardApp.account'
         ]);
 
 })();
