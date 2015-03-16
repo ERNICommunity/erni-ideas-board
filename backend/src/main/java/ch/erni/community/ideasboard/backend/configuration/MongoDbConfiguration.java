@@ -9,4 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoRepositories(basePackages = "ch.erni.community.ideasboard.backend.repository")
 public class MongoDbConfiguration {
+
+
+
 }
