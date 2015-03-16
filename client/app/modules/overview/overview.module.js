@@ -4,7 +4,8 @@
     angular
         .module('ideasBoardApp.overview',[
                 'ui.router',
-                'ideasBoardApp.idea'
+                'ideasBoardApp.idea',
+                'ideasBoardApp.formatting'
             ]);
 
 })();

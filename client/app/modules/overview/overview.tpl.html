@@ -18,7 +18,7 @@
 			<tr ng-repeat="idea in ideas | filter:query | orderBy:predicate:reverse">
 				<td>{{idea.id}}</td>
 				<td>{{idea.name}}</td>
-				<td>{{idea.description}}</td>
+				<td>{{idea.description | truncate:40}}</td>
 				<td>{{idea.tags}}</td>
 			</tr>
 		</tbody>

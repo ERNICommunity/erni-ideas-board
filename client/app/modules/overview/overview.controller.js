@@ -24,7 +24,7 @@
             {
                 id: 2,
                 name: 'Klaus',
-                description: 'c fooooo!',
+                description: 'c This is a very long description. Well, long enough to test the truncation.',
                 tags: '#bar'
             }];
         $scope.predicate = '-id';
