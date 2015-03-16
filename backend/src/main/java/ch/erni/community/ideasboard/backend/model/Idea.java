@@ -1,7 +1,6 @@
 package ch.erni.community.ideasboard.backend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,6 +13,9 @@ import javax.validation.constraints.Min;
 @Document
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Idea {
 
 	@Id
