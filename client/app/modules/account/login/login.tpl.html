@@ -1,0 +1,16 @@
+<div class="container-login">
+
+    <p>Please enter you login details in the form below. <br> In case you have any access problems, please contact: community@erni.ch</p>
+    </br>
+    <form name="loginForm" ng-controller="LoginController" ng-submit="login(credentials)" novalidate>
+        <label for="username">Username:</label>
+        <input autocomplete="off" type="text" id="username"
+               ng-model="credentials.username">
+        <label for="password">Password:</label>
+        <input autocomplete="off" type="password" id="password"
+               ng-model="credentials.password">
+        <button data-trigger-change="#password,#username" type="submit">Login</button>
+        <button type="button" ng-click="logout()"> Logout</button>
+    </form>
+    <a href="#/register">Not registerd yet? Please sign up here.</a>
+</div>
