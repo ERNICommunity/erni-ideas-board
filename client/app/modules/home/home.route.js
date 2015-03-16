@@ -12,7 +12,8 @@
             .state('home', {
                 url: '/',
                 templateUrl: 'modules/home/home.tpl.html',
-                controller: 'HomeController'
+                controller: 'HomeController',
+                controllerAs: 'home'
         });
     }
 

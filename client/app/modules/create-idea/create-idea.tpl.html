@@ -1,19 +1,22 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-			<form role="form">
+			<form role="form" name="createIdea.newIdeaForm">
 				<div class="form-group">
-					 <label for="name">Name</label><input type="text" class="form-control" ng-model="name" id="name" />
+					 <label for="name">Name</label>
+					 <input type="text" class="form-control" ng-model="createIdea.newIdea.name" />
 				</div>
 				<div class="form-group">
-					 <label for="description">Description</label><textarea class="form-control" ng-model="description" id="description" />
+					 <label for="description">Description</label>
+					 <textarea class="form-control" ng-model="createIdea.newIdea.description" />
 				</div>
 				<div class="form-group">
-					 <label for="tags">Tags</label><input type="text" class="form-control" ng-model="tags" id="tags" />
+					 <label for="tags">Tags</label>
+					 <input type="text" class="form-control" ng-model="createIdea.newIdea.tags" />
 				</div>
 
-				<button type="submit" ng-click="publish()" class="btn btn-default">Publish</button>
-				<button type="submit" ng-click="saveAsDraft()" class="btn btn-default">Save as draft</button>
+				<button type="submit" ng-click="createIdea.publish()" class="btn btn-default">Publish</button>
+				<button type="submit" ng-click="createIdea.saveAsDraft()" class="btn btn-default">Save as draft</button>
 			</form>
 		</div>
 	</div>

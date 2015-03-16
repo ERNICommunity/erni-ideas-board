@@ -12,7 +12,8 @@
             .state('my-ideas', {
                 url: '/my-ideas',
                 templateUrl: 'modules/my-ideas/my-ideas.tpl.html',
-                controller: 'MyIdeasController'
+                controller: 'MyIdeasController',
+                controllerAs: 'myIdeas'
         });
 
     }

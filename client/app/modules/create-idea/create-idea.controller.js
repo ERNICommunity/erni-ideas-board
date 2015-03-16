@@ -5,17 +5,31 @@
         .module('ideasBoardApp.createIdea')
         .controller('CreateIdeaController', CreateIdeaController);
     
-    function CreateIdeaController ($scope) {
-
+    function CreateIdeaController (IdeaService, $state) {
+        var vm = this;
     	// TODO please complete
 
-    	$scope.publish = function() {
-    		window.alert('publish');
+    	vm.publish = function() {
+    		window.alert('to be implemented');
     	};
+    	
+        vm.saveAsDraft = function () {
+            if (vm.newIdeaForm.$invalid){
+                return;
+            }
+            
+            IdeaService.createIdea(vm.newIdea,
+                function (data) { // success
+                    console.log('idea created, ', data);
+                    $state.go('my-ideas');
+                },
+                function (error) { // error
+                    console.error(error);
+                }
+            );
 
-    	$scope.saveAsDraft = function() {
-    		window.alert('saveAsDraft');
-    	};
+        };
+
     }
 
 

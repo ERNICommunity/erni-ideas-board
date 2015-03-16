@@ -3,8 +3,7 @@
 
     angular
         .module('ideasBoardApp.home',[
-                'ui.router',
-                'ideasBoardApp.idea'
+                'ui.router'
             ]);
 
 })();

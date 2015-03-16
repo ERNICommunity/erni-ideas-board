@@ -5,29 +5,16 @@
         .module('ideasBoardApp.overview')
         .controller('OverviewController', OverviewController);
 
-    OverviewController.$inject = ['$scope'];
+    OverviewController.$inject = ['IdeaService'];
 
-    function OverviewController($scope) {
-
-        $scope.ideas = [{
-                id: 0,
-                name: 'John',
-                description: 'a fooooo!',
-                tags: '#bar, #great'
-            },
-            {
-                id: 1,
-                name: 'Bill',
-                description: 'b fooooo!',
-                tags: '#great'
-            },
-            {
-                id: 2,
-                name: 'Klaus',
-                description: 'c fooooo!',
-                tags: '#bar'
-            }];
-        $scope.predicate = '-id';
-        $scope.reverse = true;
+    function OverviewController(IdeaService) {
+        var vm = this;
+        vm.predicate = '-id';
+        vm.reverse = true;
+        
+        IdeaService.getIdeas().$promise.then(function(ideas) {
+            vm.ideas = ideas;
+        });
+        
     }
 })();

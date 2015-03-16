@@ -12,7 +12,8 @@
             .state('create-idea', {
                 url: '/create-idea',
                 templateUrl: 'modules/create-idea/create-idea.tpl.html',
-                controller: 'CreateIdeaController'
+                controller: 'CreateIdeaController',
+                controllerAs: 'createIdea'
         });
 
     }

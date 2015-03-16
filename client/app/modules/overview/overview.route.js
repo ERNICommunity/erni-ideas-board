@@ -12,7 +12,8 @@
             .state('overview', {
                 url: '/overview',
                 templateUrl: 'modules/overview/overview.tpl.html',
-                controller: 'OverviewController'
+                controller: 'OverviewController',
+                controllerAs: 'overview'
         });
     }
 

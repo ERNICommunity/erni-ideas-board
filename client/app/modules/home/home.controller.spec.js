@@ -6,12 +6,10 @@ describe('Controller: HomeController', function () {
     beforeEach(module('ideasBoardApp.home'));
 
     var HomeController,
-      scope,
-      IdeaService;
+      scope;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope, _IdeaService_) {
-        IdeaService = _IdeaService_;
+    beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
         HomeController = $controller('HomeController', {
             $scope: scope

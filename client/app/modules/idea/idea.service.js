@@ -5,7 +5,7 @@
 				.module('ideasBoardApp.idea')
 				.service('IdeaService', IdeaService);
 		
-		function IdeaService (/*$rootScope, $window, halClient*/) {
+		function IdeaService ($q, IdeaResource) {
 			
 			/* TODO:  
 			 * after figuring out how to CRUD the backend,
@@ -13,18 +13,18 @@
 			   and not on the controller
 			*/
 
-			/*function getIdeas () {
-				return ...
+			function getIdeas () {
+				return IdeaResource.query();
 			}
 
-			function createIdea (newIdea) {
-				return ...
+			function createIdea (newIdea, successHandler, errorHandler) {
+				return IdeaResource.save(newIdea, successHandler, errorHandler);
 			}
 
 			return {
 				getIdeas: getIdeas,
 				createIdea: createIdea
-			}*/
+			};
 		}
 
 
