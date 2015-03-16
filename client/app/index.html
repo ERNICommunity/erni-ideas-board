@@ -75,6 +75,8 @@
 	<!-- endbuild -->
 
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+	<!-- ADD HERE FIRST THE MODULES -->
 	<script src="modules/home/home.module.js"></script>
 	<script src="modules/create-idea/create-idea.module.js"></script>
 	<script src="modules/my-ideas/my-ideas.module.js"></script>
@@ -83,10 +85,12 @@
 	<script src="modules/account/account.module.js"></script>
 	<script src="modules/account/login/login.module.js"></script>
 	<script src="modules/overview/overview.module.js"></script>
+	<script src="modules/formatting/formatting.module.js"></script>
 
 	<script src="modules/app.module.js"></script>
 	<script src="modules/app.route.js"></script>
-
+	
+	<!-- ADD ALL REMAINING JS FILES (in order by folder) -->
 	<script src="modules/home/home.route.js"></script>
 	<script src="modules/home/home.controller.js"></script>
 
@@ -104,12 +108,11 @@
 	
 	<script src="modules/account/login/login.route.js"></script>
 	<script src="modules/account/login/login.controller.js"></script>
-
-	<script src="modules/discuss-vote/discuss-vote.controller.js"></script>
 	
-
 	<script src="modules/idea/idea.service.js"></script>
 	<script src="modules/idea/idea.resource.js"></script>
+	
+	<script src="modules/formatting/truncate.filter.js"></script>
 
 	<!-- endbuild -->
 </body>

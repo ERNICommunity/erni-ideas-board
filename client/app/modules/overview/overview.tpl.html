@@ -23,8 +23,8 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="idea in overview.ideas | filter:overview.query | orderBy: overview.predicate : overview.reverse">
-				<td>{{idea.name}}</td>
-				<td>{{idea.description}}</td>
+				<td>{{idea.name | truncate:20}}</td>
+				<td>{{idea.description | truncate:40}}</td>
 				<td>{{idea.tags}}</td>
 			</tr>
 		</tbody>

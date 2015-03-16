@@ -14,7 +14,7 @@
         
         IdeaService.getIdeas().$promise.then(function(ideas) {
             vm.ideas = ideas;
-        });
-        
+        });  
     }
+    
 })();
