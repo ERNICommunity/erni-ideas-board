@@ -1,0 +1,48 @@
+body {
+    font-family: 'Source Sans Pro',calibri,sans-serif;
+}
+
+header .logo {
+	width: 57px;
+	margin: 10px 0;
+}
+
+.content{
+	min-height: 200px;
+}
+
+footer {
+	border-top: 1px solid #e5e5e5;
+	padding-top: 10px;
+	margin-top: 20px;
+	font-size: 12px;
+}
+
+.table-wrapper{
+	padding: 15px 15px 0 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/*~~~~~~~~~~~~   TYPOGRAPHY   ~~~~~~~~~~~~~~~~~~*/
+
+h3{
+	font-size: 16px;
+	color: #406Ab3;
+	margin-top: 30px;
+}
+
+/*~~~~~~~~~~~~   OVERWRITE BOOTSTRAP STYLES   ~~~~~~~~~~~~~~~~~~*/
+
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #fff;
+	background-color: #406Ab3;
+}
+
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus {
+	color: #406Ab3;
+}

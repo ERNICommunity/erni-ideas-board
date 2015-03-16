@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>ERNI Community Idea Board</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<!-- build:css(.) styles/vendor.css -->
+	<!-- bower:css -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<!-- endbower -->
+	<!-- endbuild -->
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+</head>
+<body ng-app="ideasBoardApp">
+	<div class="container">
+		<header>
+			<img src="images/logo-white-big.jpg" class="logo">
+			<nav role="navigation" class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!--a href="#/home" class="navbar-brand">ERNI Community Idea Board</a-->
+				</div>
+				<!-- Collection of nav links, forms, and other content for toggling -->
+				<div id="navbarCollapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li ui-sref-active="active"><a ui-sref="home">Home</a></li>
+						<li ui-sref-active="active"><a ui-sref="my-ideas">My Ideas</a></li>
+						<li ui-sref-active="active"><a ui-sref="discuss-vote">Discuss &amp; Vote</a></li>
+					</ul>
+					<form role="search" class="navbar-form navbar-right">
+						<div class="form-group">
+							<input type="text" placeholder="Search…" class="form-control">
+						</div>
+					</form>
+				</div>
+			</nav>
+		</header>
+
+		<div class="content">
+			<div ui-view></div>
+		</div>
+
+		<footer>
+			<p>Copyright © ERNI Community</p>
+		</footer>
+
+	</div>
+	<!-- build:js(.) scripts/vendor.js -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+	<script src="bower_components/rfc6570/rfc6570.js"></script>
+	<script src="bower_components/angular-hal/angular-hal.js"></script>
+	<!-- endbower -->
+	<!-- endbuild -->
+
+	<!-- build:js({.tmp,app}) scripts/scripts.js -->
+	<script src="modules/home/home.module.js"></script>
+	<script src="modules/my-ideas/my-ideas.module.js"></script>
+	<script src="modules/discuss-vote/discuss-vote.module.js"></script>
+	<script src="modules/idea/idea.module.js"></script>
+
+	<script src="modules/app.module.js"></script>
+	<script src="modules/app.route.js"></script>
+
+	<script src="modules/home/home.route.js"></script>
+	<script src="modules/home/home.controller.js"></script>
+
+	<script src="modules/my-ideas/my-ideas.route.js"></script>
+	<script src="modules/my-ideas/my-ideas.controller.js"></script>
+
+	<script src="modules/discuss-vote/discuss-vote.route.js"></script>
+	<script src="modules/discuss-vote/discuss-vote.controller.js"></script>
+
+	<script src="modules/idea/idea.service.js"></script>
+
+	<!-- endbuild -->
+</body>
+</html>

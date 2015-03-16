@@ -41,17 +41,17 @@ Any computer with Windows, Linux or Mac OS can be used for building and running 
     * If not, then set on Windows `JAVA_HOME` variable to you Java installation (e.g. C:\Program Files\Java\jdk1.8.0_40) and `M2_HOME` to your Maven directory (e.g. C:\dev\bin\apache-maven-3.2.5)
     On Windows you can do it via "Environment properties" dialog or for the current command line session using commands
     
-            export JAVA_HOME=C:\Program Files\Java\jdk1.8.0_40
-            export M2_HOME=C:\dev\bin\apache-maven-3.2.5
+            set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_40
+            set M2_HOME=C:\dev\bin\apache-maven-3.2.5
             
-            echo $JAVA_HOME
-            echo $M2_HOME
+            echo %JAVA_HOME%
+            echo %M2_HOME%
               
     * The crucial part however is setting the `PATH` environment variable correctly (so that `mvn` and `java` commands are visible in the command line). 
 
-            echo $PATH
+            echo %PATH%
             
-            export PATH=$PATH:$M2_HOME/bin:$JAVA_HOME/bin
+            set PATH=%PATH%;%M2_HOME%\bin;%JAVA_HOME%\bin;
             
 - Now you should be able to run the `mvn` and `java` commands without problem. If you set this via environment variables dialog then these changes should be persistent. If not they are only applied to current command line session.
 - Clone the source code to your drive, and try building it
@@ -65,3 +65,11 @@ Any computer with Windows, Linux or Mac OS can be used for building and running 
             mongod --dbpath "C:\dev\db\mongodb-data"
             
 - Finally, you can run the `mvn spring-boot:run` (inside the application root) and the server should start up. When you navigate your browser to `http://localhost:8080` you should get some default JSON message as a response. 
+
+### Troubleshooting
+
+When you get trying to build the sources via Maven error message like this:
+
+`[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project backend: Fatal error compiling: invalid target release: 1.8 -> [Help 1]`
+
+It is most likely caused by incorrect JAVA_HOME variable. Ensure that it is set to jdk8 and that when you run `mvn --version` the used java version is 8.
