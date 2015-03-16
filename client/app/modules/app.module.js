@@ -6,7 +6,8 @@
             'ideasBoardApp.home',
             'ideasBoardApp.myIdeas',
             'ideasBoardApp.discussVote',
-            'ideasBoardApp.idea'
+            'ideasBoardApp.idea',
+            'ideasBoardApp.overview'
         ]);
 
 })();
