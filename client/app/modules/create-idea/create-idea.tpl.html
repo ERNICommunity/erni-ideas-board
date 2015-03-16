@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<form role="form">
+				<div class="form-group">
+					 <label for="name">Name</label><input type="text" class="form-control" ng-model="name" id="name" />
+				</div>
+				<div class="form-group">
+					 <label for="description">Description</label><textarea class="form-control" ng-model="description" id="description" />
+				</div>
+				<div class="form-group">
+					 <label for="tags">Tags</label><input type="text" class="form-control" ng-model="tags" id="tags" />
+				</div>
+
+				<button type="submit" ng-click="publish()" class="btn btn-default">Publish</button>
+				<button type="submit" ng-click="saveAsDraft()" class="btn btn-default">Save as draft</button>
+			</form>
+		</div>
+	</div>
+</div>
