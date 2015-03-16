@@ -57,7 +57,7 @@ Any computer with Windows, Linux or Mac OS can be used for building and running 
 - Clone the source code to your drive, and try building it
  
             git clone https://github.com/ERNICommunity/erni-ideas-board.git
-            cd erni-ideas-board
+            cd erni-ideas-board/backend
             mvn clean package
             
 - Then, download [MongoDB](https://www.mongodb.org/downloads). Download the one corresponding to your OS. Then navigate to installation directory and run mongo with the path to your database (create a directory if not existing):
