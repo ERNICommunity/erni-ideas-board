@@ -159,3 +159,6 @@ dist/
 
 ### MAC OX ###
 .DS_Store
+
+### public dir ###
+public
