@@ -18,4 +18,5 @@ If you have done this and you want to build the application type in the `erni-id
             
 You can then run the application (you must have MongoDB running, don't forget!):
             
+            cd backend
             mvn spring-boot:run
