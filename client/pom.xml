@@ -25,6 +25,7 @@
 				<configuration>
 					<npmVersion>2.7.3</npmVersion>
 					<nodeVersion>v0.12.0</nodeVersion>
+					<workingDirectory>.</workingDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -36,10 +37,20 @@
 					</execution>
 					<execution>
 						<phase>prepare-package</phase>
+						<id>bower install</id>
+						<goals>
+							<goal>bower</goal>
+						</goals>
+					</execution>
+					<execution>
+						<phase>prepare-package</phase>
 						<id>grunt build</id>
 						<goals>
 							<goal>grunt</goal>
 						</goals>
+						<configuration>
+							<arguments>build</arguments>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
