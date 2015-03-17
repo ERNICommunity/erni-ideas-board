@@ -161,4 +161,7 @@ dist/
 .DS_Store
 
 ### public dir ###
-public
+public/
+
+### Also, node binaries shouldn't be put in the repo ###
+node/
