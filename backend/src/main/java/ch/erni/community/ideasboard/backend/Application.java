@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author rap
  */
 @SpringBootApplication
+@ComponentScan(basePackages = "ch.erni.community.ideasboard.backend.*")
 public class Application {
 
 	public static void main(String[] args) throws Exception {

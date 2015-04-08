@@ -1,14 +1,16 @@
 package ch.erni.community.ideasboard.backend.controller;
 
 import ch.erni.community.ideasboard.backend.Application;
+import ch.erni.community.ideasboard.backend.EmbeddedMongoDbTest;
 import ch.erni.community.ideasboard.backend.configuration.MongoDbConfiguration;
 import ch.erni.community.ideasboard.backend.model.Idea;
 import com.google.gson.Gson;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,18 +19,31 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import java.io.IOException;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {Application.class, MongoDbConfiguration.class})
-public class IdeaControllerTest {
+public class IdeaControllerTest extends EmbeddedMongoDbTest {
 
     @Autowired
     WebApplicationContext wac;
 
     private MockMvc mockMvc;
+
+    @BeforeClass
+    public static void beforeClass() throws IOException {
+        initializeDB();
+    }
+
+    @AfterClass
+    public static void afterClass() throws InterruptedException {
+        shutdownDB();
+    }
 
     @Before
     public void setup() {
