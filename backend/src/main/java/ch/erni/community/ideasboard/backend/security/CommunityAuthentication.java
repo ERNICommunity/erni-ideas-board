@@ -53,6 +53,6 @@ public class CommunityAuthentication implements Authentication {
 
     @Override
     public String getName() {
-        return null;
+        return ideasBoardUser.getEmail();
     }
 }

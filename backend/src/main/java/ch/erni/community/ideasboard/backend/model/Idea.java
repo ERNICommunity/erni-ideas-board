@@ -1,6 +1,9 @@
 package ch.erni.community.ideasboard.backend.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,27 +17,27 @@ import java.util.List;
  * @author rap
  */
 @Document
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Idea {
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	@Min(5) @Max(160)
-	private String name;
+    @Min(5)
+    @Max(160)
+    private String name;
 
-	private String description;
+    private String description;
 
-	private String author;
+    private String author;
 
-	private List<String> tags;
+    private List<String> tags;
 
-	@CreatedDate
-	private Date createdDate;
+    @CreatedDate
+    private Date createdDate;
 
-	private Status status = Status.DRAFT;
+    private Status status = Status.DRAFT;
 }

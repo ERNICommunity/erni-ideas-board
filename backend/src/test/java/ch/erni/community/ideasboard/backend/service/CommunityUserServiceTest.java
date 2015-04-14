@@ -1,15 +1,13 @@
 package ch.erni.community.ideasboard.backend.service;
 
 import ch.erni.community.ideasboard.backend.Application;
-import ch.erni.community.ideasboard.backend.EmbeddedMongoDbTest;
 import ch.erni.community.ideasboard.backend.configuration.MongoDbConfiguration;
 import ch.erni.community.ideasboard.backend.model.CommunityUser;
+import ch.erni.community.ideasboard.backend.model.IdeasBoardUser;
 import ch.erni.community.ideasboard.backend.repository.IdeasBoardUserRepository;
 import ch.erni.community.ideasboard.backend.security.CommunityAuthentication;
 import ch.erni.community.ideasboard.backend.util.JsonUtils;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.IOException;
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -28,7 +24,7 @@ import static org.mockito.Mockito.spy;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {Application.class, MongoDbConfiguration.class})
-public class CommunityUserServiceTest extends EmbeddedMongoDbTest {
+public class CommunityUserServiceTest {
 
     private CommunityUserService communityUserService;
 
@@ -39,16 +35,6 @@ public class CommunityUserServiceTest extends EmbeddedMongoDbTest {
 
     @Autowired
     private IdeasBoardUserRepository ideasBoardUserRepository;
-
-    @BeforeClass
-    public static void beforeClass() throws IOException {
-        initializeDB();
-    }
-
-    @AfterClass
-    public static void afterClass() throws InterruptedException {
-        shutdownDB();
-    }
 
     @Before
     public void before() {
@@ -79,5 +65,17 @@ public class CommunityUserServiceTest extends EmbeddedMongoDbTest {
         CommunityAuthentication communityAuthentication = communityUserService.authenticate("test", "secret");
 
         assertTrue(communityAuthentication.isAuthenticated());
+        assertEquals("test@erni.sk", communityAuthentication.getDetails());
+        assertEquals(null, communityAuthentication.getCredentials());
+        assertEquals("test@erni.sk", communityAuthentication.getName());
+
+        Object principal = communityAuthentication.getPrincipal();
+
+        assertTrue(principal instanceof IdeasBoardUser);
+
+        IdeasBoardUser ideasBoardUser = (IdeasBoardUser) principal;
+
+        assertNotNull(ideasBoardUser.getId());
+        assertEquals(ideasBoardUser.getEmail(), communityUser.getEmail());
     }
 }

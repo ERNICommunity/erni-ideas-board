@@ -1,13 +1,16 @@
 package ch.erni.community.ideasboard.backend.controller;
 
 import ch.erni.community.ideasboard.backend.Application;
-import ch.erni.community.ideasboard.backend.EmbeddedMongoDbTest;
 import ch.erni.community.ideasboard.backend.configuration.MongoDbConfiguration;
 import ch.erni.community.ideasboard.backend.model.Idea;
+import ch.erni.community.ideasboard.backend.model.Status;
+import ch.erni.community.ideasboard.backend.repository.IdeaRepository;
 import com.google.gson.Gson;
-import org.junit.AfterClass;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.reflect.TypeToken;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,33 +35,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {Application.class, MongoDbConfiguration.class})
-public class IdeaControllerTest extends EmbeddedMongoDbTest {
+public class IdeaControllerTest {
 
     @Autowired
-    WebApplicationContext wac;
+    private WebApplicationContext wac;
+
+    @Autowired
+    private IdeaRepository ideaRepository;
 
     private MockMvc mockMvc;
-
-    @BeforeClass
-    public static void beforeClass() throws IOException {
-        initializeDB();
-    }
-
-    @AfterClass
-    public static void afterClass() throws InterruptedException {
-        shutdownDB();
-    }
 
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
+    @After
+    @Before
+    public void after() {
+        ideaRepository.deleteAll();
+    }
+
     @Test
     public void testCreate() throws Exception {
-        Idea idea = mockIdea();
+        Idea idea = ideaStub();
 
-        Gson gson = new Gson();
+        Gson gson = createGsonParser();
         String content = gson.toJson(idea);
 
         this.mockMvc.perform(post("/ideas")
@@ -65,12 +71,47 @@ public class IdeaControllerTest extends EmbeddedMongoDbTest {
 
     @Test
     public void testListIssues() throws Exception {
-        this.mockMvc.perform(get("/ideas")
+        ideaRepository.save(ideaStub());
+
+        String jsonResult = this.mockMvc.perform(get("/ideas")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        List<Idea> ideas = createGsonParser().fromJson(jsonResult, new TypeToken<List<Idea>>() {
+        }.getType());
+
+        assertEquals(1, ideas.size());
+
+        Idea idea = ideas.get(0);
+
+        assertNotNull(idea.getId());
+        Idea stub = ideaStub();
+        stub.setId(idea.getId());
+        stub.setCreatedDate(idea.getCreatedDate());
+
+        assertEquals(stub, idea);
+
+        assertNotNull(idea.getCreatedDate());
     }
 
-    private Idea mockIdea() {
-        return Idea.builder().name("Test").description("Test description").build();
+    private Idea ideaStub() {
+        return Idea.builder()
+                .author("test")
+                .description("test description")
+                .name("test name")
+                .status(Status.DRAFT)
+                .tags(Arrays.asList("test", "awesome"))
+                .build();
+    }
+
+    private Gson createGsonParser() {
+        // Creates the json object which will manage the information received
+        GsonBuilder builder = new GsonBuilder();
+
+        // Register an adapter to manage the date types as long values
+        builder.registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> new Date(json.getAsJsonPrimitive().getAsLong()));
+
+        return builder.create();
     }
 }
