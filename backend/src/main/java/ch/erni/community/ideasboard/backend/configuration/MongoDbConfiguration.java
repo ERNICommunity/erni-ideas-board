@@ -11,7 +11,4 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "ch.erni.community.ideasboard.backend.repository")
 @EnableMongoAuditing
 public class MongoDbConfiguration {
-
-
-
 }

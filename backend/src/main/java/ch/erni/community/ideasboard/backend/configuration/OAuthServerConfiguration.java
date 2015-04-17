@@ -19,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Pavol Rajzak, www.rapasoft.eu
  */
@@ -63,6 +66,8 @@ public class OAuthServerConfiguration {
     protected static class AuthorizationServerConfiguration extends
             AuthorizationServerConfigurerAdapter {
 
+		final Logger logger = Logger.getLogger(OAuthServerConfiguration.class.getName());
+
         private TokenStore tokenStore = new InMemoryTokenStore();
 
         @Autowired
@@ -79,6 +84,7 @@ public class OAuthServerConfiguration {
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+			logger.log(Level.INFO, "Configuring resource server...");
             clients
                     .inMemory()
                     .withClient(CLIENT_ID)

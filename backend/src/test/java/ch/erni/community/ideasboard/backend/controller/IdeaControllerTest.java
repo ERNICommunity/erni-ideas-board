@@ -5,6 +5,7 @@ import ch.erni.community.ideasboard.backend.configuration.MongoDbConfiguration;
 import ch.erni.community.ideasboard.backend.model.Idea;
 import ch.erni.community.ideasboard.backend.model.Status;
 import ch.erni.community.ideasboard.backend.repository.IdeaRepository;
+import ch.erni.community.ideasboard.backend.util.JsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
@@ -60,7 +61,7 @@ public class IdeaControllerTest {
     public void testCreate() throws Exception {
         Idea idea = ideaStub();
 
-        Gson gson = createGsonParser();
+        Gson gson = new JsonUtils().createGsonParser();
         String content = gson.toJson(idea);
 
         this.mockMvc.perform(post("/ideas")
@@ -78,7 +79,7 @@ public class IdeaControllerTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        List<Idea> ideas = createGsonParser().fromJson(jsonResult, new TypeToken<List<Idea>>() {
+        List<Idea> ideas = new JsonUtils().createGsonParser().fromJson(jsonResult, new TypeToken<List<Idea>>() {
         }.getType());
 
         assertEquals(1, ideas.size());
@@ -105,13 +106,4 @@ public class IdeaControllerTest {
                 .build();
     }
 
-    private Gson createGsonParser() {
-        // Creates the json object which will manage the information received
-        GsonBuilder builder = new GsonBuilder();
-
-        // Register an adapter to manage the date types as long values
-        builder.registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> new Date(json.getAsJsonPrimitive().getAsLong()));
-
-        return builder.create();
-    }
 }

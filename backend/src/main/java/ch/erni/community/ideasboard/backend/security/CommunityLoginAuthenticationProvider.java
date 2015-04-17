@@ -18,7 +18,7 @@ public class CommunityLoginAuthenticationProvider implements AuthenticationProvi
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        return communityUserService.authenticate(authentication.getDetails().toString(), authentication.getCredentials().toString());
+        return communityUserService.authenticate((String) authentication.getPrincipal(), authentication.getCredentials().toString());
     }
 
     @Override

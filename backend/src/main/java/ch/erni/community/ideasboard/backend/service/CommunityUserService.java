@@ -20,12 +20,14 @@ import java.util.Optional;
 public class CommunityUserService {
 
     private static final String ERNI_MOODS_USER_REPOSITORY = "http://moodyrest.azurewebsites.net/users";
-    @Autowired
+
+	@Autowired
     JsonUtils jsonUtils;
+
     @Autowired
     IdeasBoardUserRepository ideasBoardUserRepository;
 
-    public boolean register(@Valid CommunityUser communityUser) {
+    public boolean register(CommunityUser communityUser) {
         ResponseEntity<String> jsonResponse = postCommunityUser(communityUser);
 
         ideasBoardUserRepository.save(IdeasBoardUser.builder().email(communityUser.getEmail()).build());
