@@ -23,6 +23,7 @@ Note: You should have MongoDB running already.
 `mvn clean package spring-boot:run`
 
 And the you can navigate to `http://localhost:8080`. There already is one super-simple REST endpoint: `http://localhost:8080/ideas` which supports CRUD operations. Explore it ;).
+UPDATE: You will need to use the Authentication mechanism described in "OAuth Authentication". The user database is the "Community login" one which was used for ERNI Moods app.
  
 ## How to deploy it as a war file to standalone Tomcat
 First you need to enable the `package-war` mavne profile and run `mvn clean package`. 
@@ -73,3 +74,21 @@ When you get trying to build the sources via Maven error message like this:
 `[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project backend: Fatal error compiling: invalid target release: 1.8 -> [Help 1]`
 
 It is most likely caused by incorrect JAVA_HOME variable. Ensure that it is set to jdk8 and that when you run `mvn --version` the used java version is 8.
+
+### OAuth Authentication 
+
+(I will explain it more deeply, but for now...)
+
+If you want to perform a registration request, issue this call:
+
+            curl -X POST http://localhost:8080/register -H "Content-type:application/json" -d "{\"username\":\"<<<USERNAME>>>\", \"phone\":\"<<<PHONE>>>\", \"password\": \"<<<PASSWORD>>>\", \"email\": \"<<<EMAIL>>>\"}"
+            
+If everything is valid, you should get a `HTTP 200` response. To authenticate with this newly created or already existing user perform:
+
+            curl -X POST -vu <<<CLIENT_ID>>>:<<<CLIENT_SECRET>>> http://localhost:8080/oauth/token -H "Accept:application/json" -d "password=<<<PASSWORD>>>&username=<<<USERNAME>>>&grant_type=password&scope=read&client_secret=<<<CLIENT_SECRET>>>&client_id=<<<CLIENT_ID>>>"
+            
+Of course, replace the `<<<STRINGS>>>` with your values ;). You should then get a OAuth token, which you can use for accessing the endpoints:
+            
+            curl http://localhost:8080/ideas -H "Authorization: Bearer <<<ACCESS_TOKEN>>>"
+            
+More explanation to come...
