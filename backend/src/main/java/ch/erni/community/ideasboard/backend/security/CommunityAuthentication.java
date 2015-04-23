@@ -23,8 +23,8 @@ public class CommunityAuthentication implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(() -> "USER");
-    }
+		return Collections.singleton(() -> "ROLE_USER");
+	}
 
     @Override
     public Object getCredentials() {

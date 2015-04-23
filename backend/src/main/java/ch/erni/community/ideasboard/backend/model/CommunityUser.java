@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
+
 /**
  * @author Pavol Rajzak, www.rapasoft.eu
  */
@@ -18,7 +20,8 @@ public class CommunityUser {
 
     private String id;
 
-    private String username;
+	@Size(min = 5)
+	private String username;
 
     private String phone;
 
@@ -26,6 +29,7 @@ public class CommunityUser {
     @NotEmpty
     private String email;
 
-    private String password;
+	@Size(min = 5)
+	private String password;
 
 }

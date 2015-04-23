@@ -1,5 +1,6 @@
 package ch.erni.community.ideasboard.backend.configuration;
 
+import ch.erni.community.ideasboard.backend.security.SecurityConstantsLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -28,82 +29,83 @@ import java.util.logging.Logger;
 @Configuration
 public class OAuthServerConfiguration {
 
-    public static final String CLIENT_SECRET = "3RN1_1D34L4B";
+	@Configuration
+	@EnableResourceServer
+	protected static class ResourceServerConfiguration extends
+			ResourceServerConfigurerAdapter {
 
-    public static final String CLIENT_ID = "idealab";
+		@Autowired
+		private SecurityConstantsLoader securityConstantsLoader;
 
-    private static final String RESOURCE_ID = "/";
+		@Override
+		public void configure(ResourceServerSecurityConfigurer resources) {
+			resources
+					.resourceId(securityConstantsLoader.getResourceId());
+		}
 
-    @Configuration
-    @EnableResourceServer
-    protected static class ResourceServerConfiguration extends
-            ResourceServerConfigurerAdapter {
+		@Override
+		public void configure(HttpSecurity http) throws Exception {
+			http
+					.authorizeRequests()
+					.antMatchers("/ideas/**").hasAuthority("ROLE_USER")
+					.anyRequest().permitAll()
 
-        @Override
-        public void configure(ResourceServerSecurityConfigurer resources) {
-            resources
-                    .resourceId(RESOURCE_ID);
-        }
+					.and()
+					.logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/")
+					.permitAll();
+		}
 
-        @Override
-        public void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/ideas/**").hasAuthority("ROLE_USER")
-                    .anyRequest().permitAll()
+	}
 
-                    .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .permitAll();
-        }
-
-    }
-
-    @Configuration
-    @EnableAuthorizationServer
-    protected static class AuthorizationServerConfiguration extends
-            AuthorizationServerConfigurerAdapter {
+	@Configuration
+	@EnableAuthorizationServer
+	protected static class AuthorizationServerConfiguration extends
+			AuthorizationServerConfigurerAdapter {
 
 		final Logger logger = Logger.getLogger(OAuthServerConfiguration.class.getName());
 
-        private TokenStore tokenStore = new InMemoryTokenStore();
+		// TODO @rap: This should change in the future for something more permanent
+		private TokenStore tokenStore = new InMemoryTokenStore();
 
-        @Autowired
-        @Qualifier("authenticationManagerBean")
-        private AuthenticationManager authenticationManager;
+		@Autowired
+		private SecurityConstantsLoader securityConstantsLoader;
 
-        @Override
-        public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-                throws Exception {
-            endpoints
-                    .tokenStore(this.tokenStore)
-                    .authenticationManager(this.authenticationManager);
-        }
+		@Autowired
+		@Qualifier("authenticationManagerBean")
+		private AuthenticationManager authenticationManager;
 
-        @Override
-        public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		@Override
+		public void configure(AuthorizationServerEndpointsConfigurer endpoints)
+				throws Exception {
+			endpoints
+					.tokenStore(this.tokenStore)
+					.authenticationManager(this.authenticationManager);
+		}
+
+		@Override
+		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 			logger.log(Level.INFO, "Configuring resource server...");
-            clients
-                    .inMemory()
-                    .withClient(CLIENT_ID)
-                    .authorizedGrantTypes("password", "refresh_token")
-                    .authorities("ROLE_USER")
-                    .scopes("read", "write")
-                    .resourceIds(RESOURCE_ID)
-                    .secret(CLIENT_SECRET);
-        }
+			clients
+					.inMemory()
+					.withClient(securityConstantsLoader.getClientId())
+					.authorizedGrantTypes("password", "refresh_token")
+					.authorities("ROLE_USER")
+					.scopes("read", "write")
+					.resourceIds(securityConstantsLoader.getResourceId())
+					.secret(securityConstantsLoader.getClientSecret());
+		}
 
-        @Bean
-        @Primary
-        public DefaultTokenServices tokenServices() {
-            DefaultTokenServices tokenServices = new DefaultTokenServices();
-            tokenServices.setSupportRefreshToken(true);
-            tokenServices.setTokenStore(this.tokenStore);
-            return tokenServices;
-        }
+		@Bean
+		@Primary
+		public DefaultTokenServices tokenServices() {
+			DefaultTokenServices tokenServices = new DefaultTokenServices();
+			tokenServices.setSupportRefreshToken(true);
+			tokenServices.setTokenStore(this.tokenStore);
+			return tokenServices;
+		}
 
-    }
+	}
 
 }

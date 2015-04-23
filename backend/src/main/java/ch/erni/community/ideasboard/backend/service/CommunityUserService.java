@@ -8,9 +8,10 @@ import ch.erni.community.ideasboard.backend.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -37,9 +38,12 @@ public class CommunityUserService {
 
     ResponseEntity<String> postCommunityUser(CommunityUser communityUser) {
         RestTemplate restTemplate = new RestTemplate();
-
-        return restTemplate.postForEntity(ERNI_MOODS_USER_REPOSITORY, communityUser, String.class);
-    }
+		try {
+			return restTemplate.postForEntity(ERNI_MOODS_USER_REPOSITORY, communityUser, String.class);
+		} catch (HttpServerErrorException e) {
+			throw new IllegalArgumentException(e.getResponseBodyAsString());
+		}
+	}
 
     public CommunityAuthentication authenticate(String username, String password) {
         ResponseEntity<String> jsonResponse = authenticateCommunityUser(username, password);
@@ -54,7 +58,11 @@ public class CommunityUserService {
     ResponseEntity<String> authenticateCommunityUser(String username, String password) {
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.getForEntity(ERNI_MOODS_USER_REPOSITORY + "/" + username + "/" + password, String.class);
-    }
+		try {
+			return restTemplate.getForEntity(ERNI_MOODS_USER_REPOSITORY + "/" + username + "/" + password, String.class);
+		} catch (HttpClientErrorException e) {
+			throw new IllegalArgumentException(e.getResponseBodyAsString());
+		}
+	}
 
 }
