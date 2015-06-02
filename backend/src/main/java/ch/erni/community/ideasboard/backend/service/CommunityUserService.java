@@ -52,6 +52,10 @@ public class CommunityUserService {
 
         IdeasBoardUser ideasBoardUser = ideasBoardUserRepository.findOneByEmail(communityUser.get().getEmail());
 
+		if (ideasBoardUser == null) {
+			ideasBoardUser = ideasBoardUserRepository.save(IdeasBoardUser.builder().email(communityUser.get().getEmail()).build());
+		}
+
         return new CommunityAuthentication(jsonResponse.getStatusCode().is2xxSuccessful(), ideasBoardUser);
     }
 

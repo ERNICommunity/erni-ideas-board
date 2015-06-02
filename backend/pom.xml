@@ -13,6 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<spring-security-oauth2.version>2.0.6.RELEASE</spring-security-oauth2.version>
+		<http.server.port>8080</http.server.port>
 	</properties>
 
 	<parent>
@@ -133,6 +134,7 @@
 			<properties>
 				<project.packaging>jar</project.packaging>
 				<start-class>ch.erni.community.ideasboard.backend.Application</start-class>
+				<http.server.port>12345</http.server.port>
 			</properties>
 		</profile>
 		<profile>
