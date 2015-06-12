@@ -40,7 +40,7 @@ public class CommunityUserService {
         RestTemplate restTemplate = new RestTemplate();
 		try {
 			return restTemplate.postForEntity(ERNI_MOODS_USER_REPOSITORY, communityUser, String.class);
-		} catch (HttpServerErrorException e) {
+		} catch (HttpServerErrorException | HttpClientErrorException e) {
 			throw new IllegalArgumentException(e.getResponseBodyAsString());
 		}
 	}

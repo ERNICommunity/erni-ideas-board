@@ -31,7 +31,6 @@ Then you need to setup your IDE to deploy built artifact. In IntelliJ IDEA or Ec
 This is highly individual and should be set by the developer (I can give some hints for IDEA users ;). 
 
 ## In-depth explanation of how to run the code
-> This is a draft... I'll update it once I get a hold of some vanilla-notebook
 
 Any computer with Windows, Linux or Mac OS can be used for building and running the backend service. Ensure you have admin rights and are able to install the software on your computer.
 
