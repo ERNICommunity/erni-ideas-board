@@ -1,4 +1,7 @@
 # ERNI Ideas Board
+
+:warning: **REPOSITORY NOT ACTIVE SINCE 2015 Dependabot alerts disabled**
+
 Repository containing both backend and frontend. More details to come!
 
 # How to build the whole application
